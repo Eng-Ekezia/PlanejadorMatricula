@@ -2,23 +2,21 @@
 
 export interface Subject {
   id: string;
-  name: string;
-  abbr: string; // Abreviatura (ex: CDI 1)
-  period: number;
-  prereqs: string[]; // Lista de IDs
-  coreqs: string[]; // Lista de IDs
-  hours: number;
-  credits: number;
-  minCredits?: number; // Opcional, para matérias como estágio/TCC
+  nome: string;           // Antes: name
+  codigo: string;         // Usaremos como sigla/abreviação
+  periodo: number;        // Antes: period
+  pre_requisitos: string[]; // Antes: prereqs
+  co_requisitos: string[];  // Antes: coreqs
+  carga_horaria: number;  // Antes: hours
+  creditos: number;       // Antes: credits
+  
+  // Campos opcionais que podem ou não existir no JSON
+  tipo?: string; 
+  eixo?: string;
 }
 
 export interface Course {
-  id: string; // ex: 'civil', 'energia'
-  name: string; // Nome legível do curso
+  id: string;
+  name: string; // Este nome nós geramos baseado no nome do arquivo
   subjects: Subject[];
-}
-
-export interface StudentProgress {
-  plannedIds: string[];
-  completedIds: string[];
 }
