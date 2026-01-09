@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planejador de Matrícula - CEFET-MG</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for a modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles to apply the Inter font */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+        }
+        /* Style for the card hover effect */
+        .course-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        /* Adding a subtle gradient to the button */
+        .btn-gradient {
+            background-image: linear-gradient(to right, #3b82f6, #2563eb);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <main class="container mx-auto">
+        <div class="text-center mb-12">
+            <!-- Main Title -->
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800">Planejador de Matrícula</h1>
+            <!-- Subtitle -->
+            <p class="text-lg text-gray-600 mt-2">CEFET-MG</p>
+        </div>
+
+        <!-- Grid container for the course selection cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 max-w-4xl mx-auto">
+
+            <!-- Card for "Engenharia de Energia" -->
+            <div class="course-card bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="p-8">
+                    <!-- Icon for the course -->
+                    <div class="flex justify-center mb-4">
+                        <div class="bg-yellow-100 p-4 rounded-full">
+                            <svg class="w-10 h-10 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- Course Title -->
+                    <h2 class="text-2xl font-bold text-gray-800 text-center mb-2">Engenharia de Energia</h2>
+                    <!-- Course Description -->
+                    <p class="text-gray-600 text-center mb-6">Acesse o planejador de matrícula para o curso de Engenharia de Energia.</p>
+                    <!-- Link to the planner page -->
+                    <a href="/energia.html" class="block w-full btn-gradient text-white text-center font-semibold py-3 px-6 rounded-lg hover:shadow-lg transition-shadow duration-300">
+                        Acessar Planejador
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card for "Engenharia Civil" -->
+            <div class="course-card bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="p-8">
+                    <!-- Icon for the course -->
+                    <div class="flex justify-center mb-4">
+                        <div class="bg-blue-100 p-4 rounded-full">
+                            <svg class="w-10 h-10 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- Course Title -->
+                    <h2 class="text-2xl font-bold text-gray-800 text-center mb-2">Engenharia Civil</h2>
+                    <!-- Course Description -->
+                    <p class="text-gray-600 text-center mb-6">Acesse o planejador de matrícula para o curso de Engenharia Civil.</p>
+                    <!-- Link to the planner page -->
+                    <a href="/civil.html" class="block w-full btn-gradient text-white text-center font-semibold py-3 px-6 rounded-lg hover:shadow-lg transition-shadow duration-300">
+                        Acessar Planejador
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>
