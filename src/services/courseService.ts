@@ -32,7 +32,6 @@ export const getAvailableCourses = (): Course[] => {
         
         if (foundArray) {
             console.log('Array interno encontrado e promovido a dados principais.');
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             data = foundArray;
         }
     }
