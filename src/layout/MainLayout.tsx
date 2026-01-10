@@ -1,5 +1,5 @@
 import { Outlet, Link } from 'react-router-dom';
-import { Separator } from '@/components/ui/separator';
+//import { Separator } from '@/components/ui/separator';
 
 export function MainLayout() {
   return (

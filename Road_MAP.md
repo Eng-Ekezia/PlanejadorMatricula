@@ -1,6 +1,6 @@
 # Roadmap & Protocolo de Desenvolvimento - Planejador CEFET-MG
 
-> **Status do Projeto:** Início da Fase 4
+> **Status do Projeto:** Fase 4 (Lógica de Negócios) - Passo 4.3
 > **Stack:** React, TypeScript, Vite, Tailwind CSS, shadcn/ui, Framer Motion, Zustand.
 > **Repositório:** [[Link do GitHub](https://github.com/Eng-Ekezia/PlanejadorMatricula)]
 
@@ -46,9 +46,9 @@ Este projeto segue um fluxo de desenvolvimento rigoroso guiado por um "Tech Lead
 - [x] Configurar Git e Repositório Remoto (GitHub).
 
 ### Fase 2: Camada de Dados (Data Layer) [CONCLUÍDO]
-- [x] Criar interfaces TypeScript (`Course`, `Subject`).
-- [x] Implementar `CourseService` com leitura robusta de JSONs.
-- [x] Validar estrutura de dados e tratamento de erros.
+- [x] Interfaces TypeScript (`Subject`, `Course`).
+- [x] **Adapter Service:** Implementar mapeamento robusto de JSON legado (`Sigla` -> `codigo`, `ch` -> `horas_aula`) em `courseService.ts`.
+- [x] Leitura dinâmica de arquivos via `import.meta.glob`.
 
 ### Fase 3: Infraestrutura de UI e Rotas [CONCLUÍDO]
 - [x] Configurar React Router DOM.
@@ -57,15 +57,21 @@ Este projeto segue um fluxo de desenvolvimento rigoroso guiado por um "Tech Lead
 - [x] Implementar Layout Base (`MainLayout`) responsivo.
 - [x] Implementar `LandingPage` moderna com animações.
 
-### Fase 4: O "Core" - O Planejador [PRÓXIMO]
-- [ ] **Setup de Estado:** Instalar e configurar **Zustand**.
-- [ ] **Modelagem:** Criar a Store (`useCourseStore`) para gerenciar arrays de `completed` e `planned`.
-- [ ] **Componente SubjectCard:** Criar o card da matéria com variantes visuais (travado, liberado, concluído) usando shadcn/ui.
-- [ ] **Motor de Regras:** Migrar a lógica `getCanTakeIds` e `dependentsOf` do legado para TypeScript.
-- [ ] **Grid System:** Criar o layout de períodos que se adapta a Mobile/Desktop.
+### Fase 4: O "Core" - Lógica e Estado [EM ANDAMENTO]
+- [x] **Setup de Estado:** Store Zustand com persistência (`localStorage`).
+- [x] **Grid System:** Layout panorâmico (10 colunas) responsivo na `PlannerPage`.
+- [x] **Visual do Card:** Implementação do `SubjectCard` com animação Flip 3D e visual minimalista.
+- [x] **4.1 Calculadoras:** Hook `useCourseStats` e cálculo interno de totais.
+- [x] **4.2 Co-requisitos (Simultaneidade):**
+    - [x] Lógica de "Deadlock Resolver" (Co-requisitos mútuos liberam se pegos juntos).
+    - [x] Integração na `PlannerPage`.
+- [ ] **4.3 Travas de Crédito (Critical Path):**
+    - [ ] Validar campo `min_creditos` (ou `creditos_minimos`) do JSON.
+    - [ ] Bloquear matérias avançadas baseada no somatório de créditos concluídos.
+- [ ] **4.4 Mapeamento Reverso :** Lógica `dependentsOf` para highlight (hover).
 
-### Fase 5: Polimento e Extras [FUTURO]
-- [ ] **Dark Mode:** Toggle de tema integrado.
-- [ ] **Persistência:** Middleware do Zustand para salvar no `localStorage`.
+### Fase 5: Polimento e Funcionalidades Extras [FUTURO]
+- [ ] **Header Informativo:** Exibir total de horas/créditos calculados em tempo real.
+- [ ] **Dark Mode:** Toggle de tema.
 - [ ] **Exportação:** Gerar PDF do plano.
-- [ ] **Validação:** Testes manuais comparativos com o sistema legado.
+- [ ] **Validação Final:** Testes manuais comparativos (Legacy vs Moderno).

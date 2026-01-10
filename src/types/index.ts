@@ -1,23 +1,21 @@
-// src/types/index.ts
-
 export interface Subject {
   id: string;
-  nome: string;           // Antes: name
-  codigo: string;         // Usaremos como sigla/abreviação
-  periodo: number;        // Antes: period
-  pre_requisitos: string[]; // Antes: prereqs
-  co_requisitos: string[];  // Antes: coreqs
-  carga_horaria: number;  // Antes: hours
-  creditos: number;       // Antes: credits
+  nome: string;           
+  codigo: string;         // Mapeado de "Sigla"
+  periodo: number;        
+  pre_requisitos: string[]; // Mapeado de "prerequisitos"
+  co_requisitos: string[];  // Mapeado de "corequisitos"
+  carga_horaria: number;  // Mapeado de "horas" (Relógio)
+  horas_aula: number;     // Mapeado de "ch" (Acadêmica)
+  creditos: number;       
   
-  // Campos opcionais que podem ou não existir no JSON
   tipo?: string; 
   eixo?: string;
 }
 
 export interface Course {
   id: string;
-  name: string; // Este nome nós geramos baseado no nome do arquivo
-  totalPeriods: number; // Campo adicionado
+  name: string; 
+  totalPeriods: number; 
   subjects: Subject[];
 }
