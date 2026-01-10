@@ -18,5 +18,6 @@ export interface Subject {
 export interface Course {
   id: string;
   name: string; // Este nome nós geramos baseado no nome do arquivo
+  totalPeriods: number; // Campo adicionado
   subjects: Subject[];
 }

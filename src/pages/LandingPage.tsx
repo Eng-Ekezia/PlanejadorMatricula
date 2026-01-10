@@ -38,7 +38,7 @@ export function LandingPage() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto py-12">
+    <div className="container mx-auto px-4 py-12 max-w-5xl">
       {/* Hero Section */}
       <div className="text-center mb-16 space-y-4">
         <motion.div

@@ -1,4 +1,3 @@
-// src/pages/PlannerPage.tsx
 import { useParams, Link } from 'react-router-dom';
 import { getCourseById } from '@/services/courseService';
 import { useCourseStore } from '@/store/useCourseStore';
@@ -13,12 +12,10 @@ export function PlannerPage() {
   const { toggleCompleted, togglePlanned, reset } = useCourseStore();
   const { getSubjectStatus } = useCourseLogic();
 
-  if (!course) {
-    return <div className="p-10 text-center">Curso não encontrado.</div>;
-  }
+  if (!course) return <div className="p-4">Curso não encontrado</div>;
 
-  // Define os períodos (1 ao 10)
-  const periods = Array.from({ length: 10 }, (_, i) => i + 1);
+  // Cria array dinâmico baseado no total de períodos do JSON
+  const periods = Array.from({ length: course.totalPeriods }, (_, i) => i + 1);
 
   const handleSubjectClick = (subjectId: string, currentStatus: string) => {
     if (currentStatus === 'completed') toggleCompleted(subjectId);
@@ -27,50 +24,65 @@ export function PlannerPage() {
   };
 
   return (
-    <div className="pb-24 space-y-6 animate-in fade-in duration-500">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-6">
-        <div className="space-y-1">
-          <Link to="/" className="text-sm text-slate-500 hover:text-blue-600 font-medium flex items-center gap-1">
-            &larr; Seleção de Cursos
+    <div className="flex flex-col min-h-[calc(100vh-4rem)] bg-slate-50">
+      {/* Barra de Ferramentas */}
+      <div className="flex items-center justify-between px-4 py-2 bg-white border-b border-slate-200 shadow-sm shrink-0 h-12">
+        <div className="flex items-center gap-3">
+          <Link to="/" className="text-slate-400 hover:text-blue-600 transition-colors">
+            &larr; Voltar
           </Link>
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">{course.name}</h1>
+          <h1 className="text-sm font-bold text-slate-800 uppercase tracking-tight">
+            {course.name}
+          </h1>
+          <span className="text-[10px] bg-slate-100 px-2 py-0.5 rounded text-slate-500">
+            {course.totalPeriods} Períodos
+          </span>
         </div>
-        <Button variant="outline" onClick={reset} size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50 border-red-100">
-          Limpar Tudo
+        <Button variant="ghost" size="sm" onClick={reset} className="h-7 text-xs text-red-500 hover:text-red-600 hover:bg-red-50">
+          Resetar Progresso
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-        {periods.map((period) => {
-          // AQUI: Usa 's.periodo' vindo direto do JSON
-          const periodSubjects = course.subjects.filter(s => s.periodo === period);
-          const isEmpty = periodSubjects.length === 0;
+      {/* GRID DINÂMICO FULL WIDTH */}
+      <div className="flex-grow p-2 overflow-x-auto">
+        <div 
+          className="grid gap-2 min-w-[1024px]" 
+          style={{ 
+            // AQUI ESTÁ A MÁGICA: Grid exato baseado no número de colunas
+            gridTemplateColumns: `repeat(${course.totalPeriods}, minmax(0, 1fr))` 
+          }}
+        >
+          {periods.map((period) => {
+            const periodSubjects = course.subjects.filter(s => s.periodo === period);
+            const isEmpty = periodSubjects.length === 0;
 
-          return (
-            <div key={period} className={`space-y-3 ${isEmpty ? 'opacity-50' : ''}`}>
-              <div className="flex items-center justify-between pb-2 border-b border-slate-200">
-                <span className="bg-slate-100 text-slate-700 font-bold text-xs px-2.5 py-1 rounded-full">
-                  {period}º Período
-                </span>
-              </div>
+            return (
+              <div key={period} className="flex flex-col gap-2">
+                {/* Cabeçalho */}
+                <div className={`text-center py-1 rounded border ${isEmpty ? 'bg-slate-50 border-slate-100' : 'bg-white border-blue-100'}`}>
+                  <span className={`text-[10px] font-bold uppercase ${isEmpty ? 'text-slate-300' : 'text-blue-600'}`}>
+                    {period}º P
+                  </span>
+                </div>
 
-              <div className="grid grid-cols-1 gap-3">
-                {periodSubjects.map(subject => {
-                  const status = getSubjectStatus(subject);
-                  
-                  return (
-                    <SubjectCard
-                      key={subject.id}
-                      subject={subject}
-                      status={status}
-                      onClick={() => handleSubjectClick(subject.id, status)}
-                    />
-                  );
-                })}
+                {/* Cards */}
+                <div className="flex flex-col gap-2">
+                  {periodSubjects.map(subject => {
+                    const status = getSubjectStatus(subject);
+                    return (
+                      <SubjectCard
+                        key={subject.id}
+                        subject={subject}
+                        status={status}
+                        onClick={() => handleSubjectClick(subject.id, status)}
+                      />
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );
