@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import type { Subject } from '@/types';
 import { useCourseStore } from '@/store/useCourseStore';
 
-export function useCourseLogic(courseSubjects: Subject[]) {
+export function useCourseLogic(courseSubjects: Subject[] = []) {
   const { completedIds, plannedIds } = useCourseStore();
 
   const getSubjectStatus = useCallback((subject: Subject): 'locked' | 'available' | 'completed' | 'planned' => {
